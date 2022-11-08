@@ -1,4 +1,4 @@
-# OR-Labosi
+# FER-OR-Labosi
 
 ## Opis
 Repozitorij napravljen u svrhu laboratorijskih vježbi kolegija Otvoreno računarstvu na preddiplomskom studiju u sklopu programa FER3 na Fakultetu elektrotehnike i računarstva Sveučilišta u Zagrebu.
