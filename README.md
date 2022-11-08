@@ -38,12 +38,12 @@ You can copy, modify, distribute and perform the work, even for commercial purpo
 - imaHDMIKabel - *Dvorana sadrži dostupan HDMI kabel pomoću kojeg se može povezati vlastito računalo na projektor.*
 - imaMikrofon - *Dvorana sadrži ugrađen mikrofon i razglas.*
 
-### Naredbe za izvoz podataka iz baze u CSV i JSON formatima
-cd "C:/Program Files/PostgreSQL/14/bin"
+## Naredbe za izvoz podataka iz baze u CSV i JSON formatima
+_cd "C:/Program Files/PostgreSQL/14/bin"_
 
-psql -U postgres -d FERdvorane -c "SET client_encoding TO 'UTF8'; COPY (SELECT * FROM zgrada NATURAL JOIN dvorana) TO 'C:\Users\Public\Documents\OR - Skripta za CSV i JSON/dvorane.csv' DELIMITER ',' CSV HEADER;"
+_psql -U postgres -d FERdvorane -c "SET client_encoding TO 'UTF8'; COPY (SELECT * FROM zgrada NATURAL JOIN dvorana) TO 'C:\Users\Public\Documents\OR - Skripta za CSV i JSON/dvorane.csv' DELIMITER ',' CSV HEADER;"_
 
-psql -U postgres -d FERdvorane -c "SET client_encoding TO 'UTF8'; copy (SELECT array_to_json(array_agg(row_to_json(t)))FROM (SELECT *,(SELECT array_to_json(array_agg(row_to_json(d))) FROM (SELECT oznDvorana, kapacitet, brojStolova, brojStolica, imaKlimu, imaPrirodnuSvjetlost, imaUticnice, dvoranaSOpremom, imaRacunalo, imaHDMIKabel, imaMikrofon FROM dvorana WHERE oznZgrada=zgrada.oznZgrada ORDER BY oznZgrada) d) AS dvoraneUZgradi FROM zgrada) t) TO 'C:\Users\Public\Documents\OR - Skripta za CSV i JSON\dvorane.json'
+_psql -U postgres -d FERdvorane -c "SET client_encoding TO 'UTF8'; copy (SELECT array_to_json(array_agg(row_to_json(t)))FROM (SELECT *,(SELECT array_to_json(array_agg(row_to_json(d))) FROM (SELECT oznDvorana, kapacitet, brojStolova, brojStolica, imaKlimu, imaPrirodnuSvjetlost, imaUticnice, dvoranaSOpremom, imaRacunalo, imaHDMIKabel, imaMikrofon FROM dvorana WHERE oznZgrada=zgrada.oznZgrada ORDER BY oznZgrada) d) AS dvoraneUZgradi FROM zgrada) t) TO 'C:\Users\Public\Documents\OR - Skripta za CSV i JSON\dvorane.json'_
 
 ## Napomena
 Preporučam kopirati JSON u https://codebeautify.org/jsonviewer i stisnuti *Beautify* da se vidi cijela forma.
