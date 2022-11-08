@@ -1,4 +1,5 @@
-# OR-Labosi
+
+# FER-OR-Labosi
 
 ## Opis
 Repozitorij napravljen u svrhu laboratorijskih vježbi kolegija Otvoreno računarstvu na preddiplomskom studiju u sklopu programa FER3 na Fakultetu elektrotehnike i računarstva Sveučilišta u Zagrebu.
@@ -19,8 +20,13 @@ You can copy, modify, distribute and perform the work, even for commercial purpo
 ## Datum izdavanja - 02.11.2022.
 
 ## Nazivi i opisi atributa
+
+### Zgrada
+- oznZgrada - *Jedinstvena oznaka zgrade kojoj dvorana pripada.*
+
+### Dvorana
+- oznZgrada - *Jedinstvena oznaka zgrade kojoj dvorana pripada.*
 - oznDvorana - *Jedinstvena oznaka dvorane (child).*
-- oznZgrada - *Jedinstvena oznaka zgrade kojoj dvorana pripada (parent).*
 - kapacitet - *Maksimalan kapacitet osoba u dvorani.*
 - brojStolova - *Broj stolova u dvorani.*
 - brojStolica - *Broj stolica u dvorani.*
@@ -31,3 +37,13 @@ You can copy, modify, distribute and perform the work, even for commercial purpo
 - imaRacunalo - *Dvorana sadrži fakultetsko računalo koje se može koristiti.*
 - imaHDMIKabel - *Dvorana sadrži dostupan HDMI kabel pomoću kojeg se može povezati vlastito računalo na projektor.*
 - imaMikrofon - *Dvorana sadrži ugrađen mikrofon i razglas.*
+
+## Naredbe za izvoz podataka iz baze u CSV i JSON formatima
+_cd "C:/Program Files/PostgreSQL/14/bin"_
+
+_psql -U postgres -d FERdvorane -c "SET client_encoding TO 'UTF8'; COPY (SELECT * FROM zgrada NATURAL JOIN dvorana) TO 'C:\Users\Public\Documents\OR - Skripta za CSV i JSON\FERdvorane.csv' DELIMITER ',' CSV HEADER;"_
+
+_psql -U postgres -d FERdvorane -c "SET client_encoding TO 'UTF8'; copy (SELECT array_to_json(array_agg(row_to_json(t)))FROM (SELECT *,(SELECT array_to_json(array_agg(row_to_json(d))) FROM (SELECT oznDvorana, kapacitet, brojStolova, brojStolica, imaKlimu, imaPrirodnuSvjetlost, imaUticnice, dvoranaSOpremom, imaRacunalo, imaHDMIKabel, imaMikrofon FROM dvorana WHERE oznZgrada=zgrada.oznZgrada ORDER BY oznZgrada) d) AS dvoraneUZgradi FROM zgrada) t) TO 'C:\Users\Public\Documents\OR - Skripta za CSV i JSON\FERdvorane.json'_
+
+## Napomena
+Preporučam kopirati JSON u https://codebeautify.org/jsonviewer i stisnuti *Beautify* da se vidi cijela forma.
