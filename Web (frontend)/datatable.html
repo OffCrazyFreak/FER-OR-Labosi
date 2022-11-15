@@ -17,31 +17,39 @@
   <body>
     <h1><a href="index.html">Homepage</a></h1>
 
-    <input
-      type="search"
-      class="searchInput"
-      onkeyup="filterTable()"
-      placeholder="Filter table data..."
-    />
+    <div>
+      <input
+        type="search"
+        class="searchInput"
+        onkeyup="filterTable()"
+        placeholder="Filter table data..."
+      />
 
-    <select class="columnSelect" onchange="filterTable()">
-      <option value="wildcard" selected>Sva polja (wildcard)</option>
+      <select class="columnSelect" onchange="filterTable()">
+        <option value="wildcard" selected>Sva polja (wildcard)</option>
 
-      <option value="oznzgrada">oznzgrada</option>
-      <option value="ozndvorana">ozndvorana</option>
-      <option value="kapacitet">kapacitet</option>
-      <option value="brojstolova">brojstolova</option>
-      <option value="brojstolica">brojstolica</option>
-      <option value="imaklimu">imaklimu</option>
-      <option value="imaprirodnusvjetlost">imaprirodnusvjetlost</option>
-      <option value="imauticnice">imauticnice</option>
-      <option value="dvoranasopremom">dvoranasopremom</option>
-      <option value="imaracunalo">imaracunalo</option>
-      <option value="imahdmikabel">imahdmikabel</option>
-      <option value="imamikrofon">imamikrofon</option>
-    </select>
-
+        <option value="oznzgrada">oznzgrada</option>
+        <option value="ozndvorana">ozndvorana</option>
+        <option value="kapacitet">kapacitet</option>
+        <option value="brojstolova">brojstolova</option>
+        <option value="brojstolica">brojstolica</option>
+        <option value="imaklimu">imaklimu</option>
+        <option value="imaprirodnusvjetlost">imaprirodnusvjetlost</option>
+        <option value="imauticnice">imauticnice</option>
+        <option value="dvoranasopremom">dvoranasopremom</option>
+        <option value="imaracunalo">imaracunalo</option>
+        <option value="imahdmikabel">imahdmikabel</option>
+        <option value="imamikrofon">imamikrofon</option>
+      </select>
+    </div>
     <br />
+
+    <div>
+      <button>Download visible data in JSON format</button>
+      <button onclick="downloadCSV()">
+        Download visible data in CSV format
+      </button>
+    </div>
     <br />
 
     <div style="overflow-x: auto">
@@ -199,6 +207,41 @@
 
           trows[i].style.display = displayRow;
         }
+      }
+
+      function downloadCSV() {
+        let csv = "";
+        let columnNames = "";
+        let columnValues = "";
+
+        for (let i = 0; i < trows.length; i++) {
+          columnValues = "";
+
+          tdatas = trows[i].getElementsByTagName("td");
+          // console.log(trows[i].childNodes);
+
+          if (trows[i].style.display === "") {
+            for (let j = 1; j < trows[i].childNodes.length; j += 2) {
+              columnNames += columnNames.length > 0 ? "," : "";
+              columnNames += trows[i].childNodes[j].className;
+            }
+
+            // console.log(columnNames);
+            if (csv.length === 0) csv += columnNames;
+          }
+
+          if (trows[i].style.display === "") {
+            for (let j = 1; j < trows[i].childNodes.length; j += 2) {
+              columnValues += columnValues.length > 0 ? "," : "";
+              columnValues += trows[i].childNodes[j].textContent;
+            }
+
+            // console.log(columnValues);
+            csv += "\n" + columnValues;
+          }
+        }
+
+        console.log(csv);
       }
     </script>
   </body>
