@@ -22,10 +22,10 @@ You can copy, modify, distribute and perform the work, even for commercial purpo
 ## Nazivi i opisi atributa
 
 ### Zgrada
-- oznZgrada - *Jedinstvena oznaka zgrade kojoj dvorana pripada.*
+- oznZgrada - *Jedinstvena oznaka zgrade.*
 
 ### Dvorana
-- oznZgrada - *Jedinstvena oznaka zgrade kojoj dvorana pripada.*
+- oznZgrada - *Oznaka zgrade kojoj dvorana pripada.*
 - oznDvorana - *Jedinstvena oznaka dvorane (child).*
 - kapacitet - *Maksimalan kapacitet osoba u dvorani.*
 - brojStolova - *Broj stolova u dvorani.*

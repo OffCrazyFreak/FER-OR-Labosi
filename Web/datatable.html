@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta name="author" content="Jakov Jakovac" />
+
+    <meta
+      name="description"
+      content="Web stranica napravljena u svrhu laboratorijskih vježbi kolegija Otvoreno računarstvu na preddiplomskom studiju u sklopu programa FER3 na Fakultetu elektrotehnike i računarstva Sveučilišta u Zagrebu."
+    />
+
+    <title>FER dvorane dataset</title>
+  </head>
+  <body>
+    <h1><a href="index.html">Homepage</a></h1>
+
+    <input
+      type="search"
+      class="searchInput"
+      onkeyup="filterTable()"
+      placeholder="Filter table data..."
+    />
+
+    <select class="columnSelect" onchange="filterTable()">
+      <option value="wildcard" selected>Sva polja (wildcard)</option>
+
+      <option value="oznzgrada">oznzgrada</option>
+      <option value="ozndvorana">ozndvorana</option>
+      <option value="kapacitet">kapacitet</option>
+      <option value="brojstolova">brojstolova</option>
+      <option value="brojstolica">brojstolica</option>
+      <option value="imaklimu">imaklimu</option>
+      <option value="imaprirodnusvjetlost">imaprirodnusvjetlost</option>
+      <option value="imauticnice">imauticnice</option>
+      <option value="dvoranasopremom">dvoranasopremom</option>
+      <option value="imaracunalo">imaracunalo</option>
+      <option value="imahdmikabel">imahdmikabel</option>
+      <option value="imamikrofon">imamikrofon</option>
+    </select>
+
+    <br />
+    <br />
+
+    <div style="overflow-x: auto">
+      <table
+        class="table"
+        style="
+          border: 1px solid darkgray;
+          border-collapse: collapse;
+          text-align: center;
+        "
+      >
+        <thead>
+          <tr class="th-row" style="border: 1px solid darkgray">
+            <th style="border: 1px dashed darkgray">
+              <h4>oznzgrada</h4>
+            </th>
+            <th style="border: 1px dashed darkgray">
+              <h4>ozndvorana</h4>
+            </th>
+            <th style="border: 1px dashed darkgray">
+              <h4>kapacitet</h4>
+            </th>
+            <th style="border: 1px dashed darkgray">
+              <h4>brojstolova</h4>
+            </th>
+            <th style="border: 1px dashed darkgray">
+              <h4>brojstolica</h4>
+            </th>
+            <th style="border: 1px dashed darkgray">
+              <h4>imaklimu</h4>
+            </th>
+            <th style="border: 1px dashed darkgray">
+              <h4>imaprirodnusvjetlost</h4>
+            </th>
+            <th style="border: 1px dashed darkgray">
+              <h4>imauticnice</h4>
+            </th>
+            <th style="border: 1px dashed darkgray">
+              <h4>dvoranasopremom</h4>
+            </th>
+            <th style="border: 1px dashed darkgray">
+              <h4>imaracunalo</h4>
+            </th>
+            <th style="border: 1px dashed darkgray">
+              <h4>imahdmikabel</h4>
+            </th>
+            <th style="border: 1px dashed darkgray">
+              <h4>imamikrofon</h4>
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <template data-template>
+            <tr>
+              <td class="oznzgrada"><p></p></td>
+              <td class="ozndvorana"><p></p></td>
+              <td class="kapacitet"><p></p></td>
+              <td class="brojstolova"><p></p></td>
+              <td class="brojstolica"><p></p></td>
+              <td class="imaklimu"><p></p></td>
+              <td class="imaprirodnusvjetlost"><p></p></td>
+              <td class="imauticnice"><p></p></td>
+              <td class="dvoranasopremom"><p></p></td>
+              <td class="imaracunalo"><p></p></td>
+              <td class="imahdmikabel"><p></p></td>
+              <td class="imamikrofon"><p></p></td>
+            </tr>
+          </template>
+        </tbody>
+      </table>
+    </div>
+
+    <script>
+      const trTemplate = document.querySelector("[data-template]");
+      const tableHeadRows = document.querySelectorAll(".th-row > th > h4");
+      const tableBody = document.querySelector(".table > tbody");
+      const trows = tableBody.getElementsByTagName("tr");
+
+      const columnSelect = document.querySelector(".columnSelect");
+      const searchInputElement = document.querySelector(".searchInput");
+
+      fetch("./data/FERdvorane.json")
+        .then((res) => res.json())
+        .then((data) => {
+          fillTable(data);
+        });
+
+      function fillTable(data) {
+        data.map((zgrada) => {
+          zgrada.dvoraneuzgradi.forEach((dvorana) => {
+            const trElement = trTemplate.content.cloneNode(true).children[0];
+
+            const oznzgradaElement = trElement.querySelector(".oznzgrada");
+            const ozndvoranaElement = trElement.querySelector(".ozndvorana");
+            const kapacitetElement = trElement.querySelector(".kapacitet");
+            const brojstolovaElement = trElement.querySelector(".brojstolova");
+            const brojstolicaElement = trElement.querySelector(".brojstolica");
+            const imaklimuElement = trElement.querySelector(".imaklimu");
+            const imaprirodnusvjetlostElement = trElement.querySelector(
+              ".imaprirodnusvjetlost"
+            );
+            const imauticniceElement = trElement.querySelector(".imauticnice");
+            const dvoranasopremomElement =
+              trElement.querySelector(".dvoranasopremom");
+            const imaracunaloElement = trElement.querySelector(".imaracunalo");
+            const imahdmikabelElement =
+              trElement.querySelector(".imahdmikabel");
+            const imamikrofonElement = trElement.querySelector(".imamikrofon");
+
+            oznzgradaElement.firstChild.innerText = zgrada.oznzgrada;
+            ozndvoranaElement.firstChild.innerText = dvorana.ozndvorana;
+            kapacitetElement.firstChild.innerText = dvorana.kapacitet;
+            brojstolovaElement.firstChild.innerText = dvorana.brojstolova;
+            brojstolicaElement.firstChild.innerText = dvorana.brojstolica;
+            imaklimuElement.firstChild.innerText = dvorana.imaklimu;
+            imaprirodnusvjetlostElement.firstChild.innerText =
+              dvorana.imaprirodnusvjetlost;
+            imauticniceElement.firstChild.innerText = dvorana.imauticnice;
+            dvoranasopremomElement.firstChild.innerText =
+              dvorana.dvoranasopremom;
+            imaracunaloElement.firstChild.innerText = dvorana.imaracunalo;
+            imahdmikabelElement.firstChild.innerText = dvorana.imahdmikabel;
+            imamikrofonElement.firstChild.innerText = dvorana.imamikrofon;
+
+            tableBody.append(trElement);
+          });
+        });
+      }
+
+      function filterTable() {
+        const filter = searchInputElement.value.toUpperCase();
+
+        let tdatas, txtValue;
+        for (let i = 0; i < trows.length; i++) {
+          tdatas = trows[i].getElementsByTagName("td");
+
+          let displayRow = "none";
+          for (let j = 0; j < tdatas.length; j++) {
+            if (
+              columnSelect.value !== "wildcard" &&
+              tableHeadRows[j].textContent !== columnSelect.value
+            ) {
+              continue;
+            }
+
+            if (tdatas[j]) {
+              txtValue = tdatas[j].textContent || tdatas[j].innerText;
+              if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                displayRow = "";
+                break; // go check next row
+              }
+            }
+          }
+
+          trows[i].style.display = displayRow;
+        }
+      }
+    </script>
+  </body>
+</html>
