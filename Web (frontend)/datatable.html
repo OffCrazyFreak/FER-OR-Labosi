@@ -13,6 +13,27 @@
     />
 
     <title>FER dvorane dataset</title>
+
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+
+      table {
+        border: 1px solid darkgray;
+        border-collapse: collapse;
+        text-align: center;
+      }
+
+      tr {
+        border: 1px solid darkgray;
+      }
+
+      th,
+      td {
+        border: 1px dashed darkgray;
+      }
+    </style>
   </head>
   <body>
     <h1><a href="index.html">Homepage</a></h1>
@@ -45,58 +66,53 @@
     <br />
 
     <div>
-      <button>Download visible data in JSON format</button>
-      <button onclick="downloadCSV()">
+      <button onclick="downloadAsJSON()">
+        Download visible data in JSON format
+      </button>
+      <button onclick="downloadAsCSV()">
         Download visible data in CSV format
       </button>
     </div>
     <br />
 
     <div style="overflow-x: auto">
-      <table
-        class="table"
-        style="
-          border: 1px solid darkgray;
-          border-collapse: collapse;
-          text-align: center;
-        "
-      >
+      <table class="table">
         <thead>
-          <tr class="th-row" style="border: 1px solid darkgray">
-            <th style="border: 1px dashed darkgray">
+          <tr class="th-row">
+            <th>
               <h4>oznzgrada</h4>
             </th>
-            <th style="border: 1px dashed darkgray">
+            <th>
               <h4>ozndvorana</h4>
             </th>
-            <th style="border: 1px dashed darkgray">
+            <th>
               <h4>kapacitet</h4>
             </th>
-            <th style="border: 1px dashed darkgray">
+            <th>
               <h4>brojstolova</h4>
             </th>
-            <th style="border: 1px dashed darkgray">
+            <th>
               <h4>brojstolica</h4>
             </th>
-            <th style="border: 1px dashed darkgray">
+            <th>
               <h4>imaklimu</h4>
             </th>
-            <th style="border: 1px dashed darkgray">
+            <th>
               <h4>imaprirodnusvjetlost</h4>
             </th>
-            <th style="border: 1px dashed darkgray">
+            <th>
               <h4>imauticnice</h4>
             </th>
-            <th style="border: 1px dashed darkgray">
+            <th>
               <h4>dvoranasopremom</h4>
             </th>
-            <th style="border: 1px dashed darkgray">
+            <th>
               <h4>imaracunalo</h4>
             </th>
-            <th style="border: 1px dashed darkgray">
+            <th>
               <h4>imahdmikabel</h4>
             </th>
-            <th style="border: 1px dashed darkgray">
+            <th>
               <h4>imamikrofon</h4>
             </th>
           </tr>
@@ -209,7 +225,7 @@
         }
       }
 
-      function downloadCSV() {
+      function convertTableToCSV() {
         let csv = "";
         let columnNames = "";
         let columnValues = "";
@@ -241,7 +257,86 @@
           }
         }
 
-        console.log(csv);
+        return csv;
+      }
+
+      function downloadAsCSV() {
+        const csv = convertTableToCSV();
+
+        saveObjectToFile(csv, "tabledata.csv");
+      }
+
+      function downloadAsJSON() {
+        const csv = convertTableToCSV();
+        const json = csvToJSON(csv);
+        saveObjectToFile(json, "tabledata.json");
+      }
+
+      // custom function for saving object into file
+      function saveObjectToFile(data, filename) {
+        if (!data) {
+          console.error("Console.save: No data");
+          return;
+        }
+
+        if (!filename) filename = "console.json";
+
+        if (typeof data === "object") {
+          data = JSON.stringify(data, undefined, 4);
+        }
+
+        var blob = new Blob([data], { type: "text/json" }),
+          e = document.createEvent("MouseEvents"),
+          a = document.createElement("a");
+
+        a.download = filename;
+        a.href = window.URL.createObjectURL(blob);
+        a.dataset.downloadurl = ["text/json", a.download, a.href].join(":");
+        e.initMouseEvent(
+          "click",
+          true,
+          false,
+          window,
+          0,
+          0,
+          0,
+          0,
+          0,
+          false,
+          false,
+          false,
+          false,
+          0,
+          null
+        );
+        a.dispatchEvent(e);
+      }
+
+      // custom function for converting csv object into json
+      function csvToJSON(csv) {
+        var lines = csv.split("\n");
+
+        var result = [];
+
+        // NOTE: If your columns contain commas in their values, you'll need
+        // to deal with those before doing the next step
+        // (you might convert them to &&& or something, then covert them back later)
+        // jsfiddle showing the issue https://jsfiddle.net/
+        var headers = lines[0].split(",");
+
+        for (var i = 1; i < lines.length; i++) {
+          var obj = {};
+          var currentline = lines[i].split(",");
+
+          for (var j = 0; j < headers.length; j++) {
+            obj[headers[j]] = currentline[j];
+          }
+
+          result.push(obj);
+        }
+
+        //return result; //JavaScript object
+        return JSON.stringify(result); //JSON
       }
     </script>
   </body>
