@@ -68,11 +68,14 @@
           },
           "400": {
             "description": "Bad request"
+          },
+          "409": {
+            "description": "Confilct - that resource already exists"
           }
         }
       }
     },
-    "/zgrade/{oznzgrade}": {
+    "/zgrade/{oznzgrada}": {
       "get": {
         "tags": [
           "Zgrade"
@@ -82,7 +85,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "oznzgrade",
+            "name": "oznzgrada",
             "schema": {
               "type": "string"
             },
@@ -94,8 +97,8 @@
           "200": {
             "description": "Successful response"
           },
-          "400": {
-            "description": "Bad request"
+          "404": {
+            "description": "Not Found - invalid oznzgrada"
           }
         }
       },
@@ -108,7 +111,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "oznzgrade",
+            "name": "oznzgrada",
             "schema": {
               "type": "string"
             },
@@ -155,6 +158,9 @@
           },
           "400": {
             "description": "Bad request"
+          },
+          "404": {
+            "description": "Not Found - invalid oznzgrada"
           }
         }
       },
@@ -167,7 +173,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "oznzgrade",
+            "name": "oznzgrada",
             "schema": {
               "type": "string"
             },
@@ -179,8 +185,8 @@
           "200": {
             "description": "Successful response"
           },
-          "400": {
-            "description": "Bad request"
+          "404": {
+            "description": "Not Found - invalid oznzgrada"
           }
         }
       }
@@ -210,7 +216,7 @@
         }
       }
     },
-    "/dvorane/{ozndvorane}": {
+    "/dvorane/{ozndvorana}": {
       "get": {
         "tags": [
           "Dvorane"
@@ -220,7 +226,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "ozndvorane",
+            "name": "ozndvorana",
             "required": true,
             "description": "Oznaka dvorane koju treba dohvatiti",
             "schema": {
@@ -232,8 +238,8 @@
           "200": {
             "description": "Successful response"
           },
-          "400": {
-            "description": "Bad request"
+          "404": {
+            "description": "Not Found - invalid ozndvorana"
           }
         }
       }
