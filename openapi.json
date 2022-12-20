@@ -243,6 +243,20 @@
           }
         }
       }
+    },
+    "/api": {
+      "get": {
+        "tags": [
+          "API"
+        ],
+        "summary": "API",
+        "description": "Vraća json datoteku prema openapi 3.0.3 specifikaciji",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
     }
   }
 }
