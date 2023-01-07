@@ -148,51 +148,48 @@
       const columnSelect = document.querySelector(".columnSelect");
       const searchInputElement = document.querySelector(".searchInput");
 
-      fetch("./data/FERdvorane.json")
+      // needs extension "CORS unblock" - https://stackoverflow.com/questions/36968963/how-to-configure-cors-in-a-spring-boot-spring-security-application
+      fetch("http://localhost:8080/dvorane")
         .then((res) => res.json())
         .then((data) => {
           fillTable(data);
         });
 
       function fillTable(data) {
-        data.map((zgrada) => {
-          zgrada.dvoraneuzgradi.forEach((dvorana) => {
-            const trElement = trTemplate.content.cloneNode(true).children[0];
+        data.forEach((dvorana) => {
+          const trElement = trTemplate.content.cloneNode(true).children[0];
 
-            const oznzgradaElement = trElement.querySelector(".oznzgrada");
-            const ozndvoranaElement = trElement.querySelector(".ozndvorana");
-            const kapacitetElement = trElement.querySelector(".kapacitet");
-            const brojstolovaElement = trElement.querySelector(".brojstolova");
-            const brojstolicaElement = trElement.querySelector(".brojstolica");
-            const imaklimuElement = trElement.querySelector(".imaklimu");
-            const imaprirodnusvjetlostElement = trElement.querySelector(
-              ".imaprirodnusvjetlost"
-            );
-            const imauticniceElement = trElement.querySelector(".imauticnice");
-            const dvoranasopremomElement =
-              trElement.querySelector(".dvoranasopremom");
-            const imaracunaloElement = trElement.querySelector(".imaracunalo");
-            const imahdmikabelElement =
-              trElement.querySelector(".imahdmikabel");
-            const imamikrofonElement = trElement.querySelector(".imamikrofon");
+          const oznzgradaElement = trElement.querySelector(".oznzgrada");
+          const ozndvoranaElement = trElement.querySelector(".ozndvorana");
+          const kapacitetElement = trElement.querySelector(".kapacitet");
+          const brojstolovaElement = trElement.querySelector(".brojstolova");
+          const brojstolicaElement = trElement.querySelector(".brojstolica");
+          const imaklimuElement = trElement.querySelector(".imaklimu");
+          const imaprirodnusvjetlostElement = trElement.querySelector(
+            ".imaprirodnusvjetlost"
+          );
+          const imauticniceElement = trElement.querySelector(".imauticnice");
+          const dvoranasopremomElement =
+            trElement.querySelector(".dvoranasopremom");
+          const imaracunaloElement = trElement.querySelector(".imaracunalo");
+          const imahdmikabelElement = trElement.querySelector(".imahdmikabel");
+          const imamikrofonElement = trElement.querySelector(".imamikrofon");
 
-            oznzgradaElement.firstChild.innerText = zgrada.oznzgrada;
-            ozndvoranaElement.firstChild.innerText = dvorana.ozndvorana;
-            kapacitetElement.firstChild.innerText = dvorana.kapacitet;
-            brojstolovaElement.firstChild.innerText = dvorana.brojstolova;
-            brojstolicaElement.firstChild.innerText = dvorana.brojstolica;
-            imaklimuElement.firstChild.innerText = dvorana.imaklimu;
-            imaprirodnusvjetlostElement.firstChild.innerText =
-              dvorana.imaprirodnusvjetlost;
-            imauticniceElement.firstChild.innerText = dvorana.imauticnice;
-            dvoranasopremomElement.firstChild.innerText =
-              dvorana.dvoranasopremom;
-            imaracunaloElement.firstChild.innerText = dvorana.imaracunalo;
-            imahdmikabelElement.firstChild.innerText = dvorana.imahdmikabel;
-            imamikrofonElement.firstChild.innerText = dvorana.imamikrofon;
+          oznzgradaElement.firstChild.innerText = dvorana.oznzgrada;
+          ozndvoranaElement.firstChild.innerText = dvorana.ozndvorana;
+          kapacitetElement.firstChild.innerText = dvorana.kapacitet;
+          brojstolovaElement.firstChild.innerText = dvorana.brojstolova;
+          brojstolicaElement.firstChild.innerText = dvorana.brojstolica;
+          imaklimuElement.firstChild.innerText = dvorana.imaklimu;
+          imaprirodnusvjetlostElement.firstChild.innerText =
+            dvorana.imaprirodnusvjetlost;
+          imauticniceElement.firstChild.innerText = dvorana.imauticnice;
+          dvoranasopremomElement.firstChild.innerText = dvorana.dvoranasopremom;
+          imaracunaloElement.firstChild.innerText = dvorana.imaracunalo;
+          imahdmikabelElement.firstChild.innerText = dvorana.imahdmikabel;
+          imamikrofonElement.firstChild.innerText = dvorana.imamikrofon;
 
-            tableBody.append(trElement);
-          });
+          tableBody.append(trElement);
         });
       }
 

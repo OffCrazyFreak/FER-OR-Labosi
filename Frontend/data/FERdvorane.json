@@ -1,8 +1,12 @@
 [
   {
+    "@context": "https://schema.org/",
+    "@type": "GovernmentBuilding",
     "oznzgrada": "A",
     "dvoraneuzgradi": [
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "A101",
         "kapacitet": 60,
         "brojstolova": 31,
@@ -16,6 +20,8 @@
         "imamikrofon": false
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "A102",
         "kapacitet": 60,
         "brojstolova": 31,
@@ -29,6 +35,8 @@
         "imamikrofon": false
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "A104",
         "kapacitet": 30,
         "brojstolova": 16,
@@ -42,6 +50,8 @@
         "imamikrofon": false
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "A105",
         "kapacitet": 24,
         "brojstolova": 13,
@@ -55,6 +65,8 @@
         "imamikrofon": false
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "A109",
         "kapacitet": 40,
         "brojstolova": 21,
@@ -68,6 +80,8 @@
         "imamikrofon": false
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "A110",
         "kapacitet": 40,
         "brojstolova": 21,
@@ -81,6 +95,8 @@
         "imamikrofon": false
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "A111",
         "kapacitet": 60,
         "brojstolova": 31,
@@ -94,6 +110,8 @@
         "imamikrofon": false
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "A201",
         "kapacitet": 60,
         "brojstolova": 31,
@@ -107,6 +125,8 @@
         "imamikrofon": false
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "A202",
         "kapacitet": 60,
         "brojstolova": 31,
@@ -120,6 +140,8 @@
         "imamikrofon": false
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "A204",
         "kapacitet": 30,
         "brojstolova": 16,
@@ -133,6 +155,8 @@
         "imamikrofon": false
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "A205",
         "kapacitet": 30,
         "brojstolova": 16,
@@ -146,6 +170,8 @@
         "imamikrofon": false
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "A209",
         "kapacitet": 50,
         "brojstolova": 26,
@@ -159,6 +185,8 @@
         "imamikrofon": false
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "A210",
         "kapacitet": 60,
         "brojstolova": 31,
@@ -172,6 +200,8 @@
         "imamikrofon": false
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "A211",
         "kapacitet": 60,
         "brojstolova": 31,
@@ -185,6 +215,8 @@
         "imamikrofon": false
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "A301",
         "kapacitet": 16,
         "brojstolova": 9,
@@ -198,6 +230,8 @@
         "imamikrofon": false
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "A302",
         "kapacitet": 16,
         "brojstolova": 9,
@@ -211,6 +245,8 @@
         "imamikrofon": false
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "A309",
         "kapacitet": 16,
         "brojstolova": 9,
@@ -224,6 +260,8 @@
         "imamikrofon": false
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "A310",
         "kapacitet": 16,
         "brojstolova": 9,
@@ -237,6 +275,8 @@
         "imamikrofon": false
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "A311",
         "kapacitet": 16,
         "brojstolova": 9,
@@ -250,6 +290,8 @@
         "imamikrofon": false
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "A312",
         "kapacitet": 16,
         "brojstolova": 9,
@@ -265,9 +307,13 @@
     ]
   },
   {
+    "@context": "https://schema.org/",
+    "@type": "GovernmentBuilding",
     "oznzgrada": "B",
     "dvoraneuzgradi": [
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "B1",
         "kapacitet": 100,
         "brojstolova": null,
@@ -281,6 +327,8 @@
         "imamikrofon": true
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "B2",
         "kapacitet": 50,
         "brojstolova": null,
@@ -294,6 +342,8 @@
         "imamikrofon": true
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "B3",
         "kapacitet": 50,
         "brojstolova": null,
@@ -307,6 +357,8 @@
         "imamikrofon": true
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "B4",
         "kapacitet": 100,
         "brojstolova": null,
@@ -320,6 +372,8 @@
         "imamikrofon": true
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "B5",
         "kapacitet": 40,
         "brojstolova": null,
@@ -335,9 +389,13 @@
     ]
   },
   {
+    "@context": "https://schema.org/",
+    "@type": "GovernmentBuilding",
     "oznzgrada": "C",
     "dvoraneuzgradi": [
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "C603",
         "kapacitet": 36,
         "brojstolova": null,
@@ -353,9 +411,13 @@
     ]
   },
   {
+    "@context": "https://schema.org/",
+    "@type": "GovernmentBuilding",
     "oznzgrada": "D",
     "dvoraneuzgradi": [
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "D033",
         "kapacitet": 35,
         "brojstolova": null,
@@ -369,6 +431,8 @@
         "imamikrofon": null
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "D1",
         "kapacitet": 100,
         "brojstolova": null,
@@ -382,6 +446,8 @@
         "imamikrofon": true
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "D152",
         "kapacitet": 50,
         "brojstolova": null,
@@ -395,6 +461,8 @@
         "imamikrofon": null
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "D153",
         "kapacitet": 25,
         "brojstolova": null,
@@ -408,6 +476,8 @@
         "imamikrofon": null
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "D158",
         "kapacitet": 25,
         "brojstolova": null,
@@ -421,6 +491,8 @@
         "imamikrofon": null
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "D159",
         "kapacitet": 20,
         "brojstolova": null,
@@ -434,6 +506,8 @@
         "imamikrofon": null
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "D160",
         "kapacitet": 60,
         "brojstolova": null,
@@ -447,6 +521,8 @@
         "imamikrofon": null
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "D2",
         "kapacitet": 100,
         "brojstolova": null,
@@ -460,6 +536,8 @@
         "imamikrofon": true
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "D251",
         "kapacitet": 20,
         "brojstolova": null,
@@ -473,6 +551,8 @@
         "imamikrofon": null
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "D258",
         "kapacitet": 20,
         "brojstolova": null,
@@ -486,6 +566,8 @@
         "imamikrofon": null
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "D259",
         "kapacitet": 18,
         "brojstolova": null,
@@ -499,6 +581,8 @@
         "imamikrofon": null
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "D260",
         "kapacitet": 64,
         "brojstolova": null,
@@ -512,6 +596,8 @@
         "imamikrofon": null
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "D262",
         "kapacitet": 24,
         "brojstolova": null,
@@ -525,6 +611,8 @@
         "imamikrofon": null
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "D263",
         "kapacitet": 16,
         "brojstolova": null,
@@ -538,6 +626,8 @@
         "imamikrofon": null
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "D269",
         "kapacitet": 24,
         "brojstolova": null,
@@ -551,6 +641,8 @@
         "imamikrofon": null
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "D270",
         "kapacitet": 24,
         "brojstolova": null,
@@ -564,6 +656,8 @@
         "imamikrofon": null
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "D272",
         "kapacitet": 64,
         "brojstolova": null,
@@ -577,6 +671,8 @@
         "imamikrofon": null
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "D273",
         "kapacitet": 60,
         "brojstolova": null,
@@ -590,6 +686,8 @@
         "imamikrofon": null
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "D346",
         "kapacitet": 55,
         "brojstolova": null,
@@ -603,6 +701,8 @@
         "imamikrofon": null
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "D347",
         "kapacitet": 25,
         "brojstolova": null,
@@ -616,6 +716,8 @@
         "imamikrofon": null
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "Siva vijećnica",
         "kapacitet": 100,
         "brojstolova": null,
@@ -629,6 +731,8 @@
         "imamikrofon": true
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "Bijela vijećnica",
         "kapacitet": 20,
         "brojstolova": null,
@@ -642,6 +746,8 @@
         "imamikrofon": false
       },
       {
+        "@context": "https://schema.org/",
+        "@type": "Room",
         "ozndvorana": "Crna vijećnica",
         "kapacitet": 50,
         "brojstolova": null,

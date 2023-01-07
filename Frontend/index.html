@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="h-100">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -15,55 +15,565 @@
     <title>FER dvorane dataset</title>
 
     <style>
-      body {
-        font-family: sans-serif;
+      table {
+        border: 1px solid darkgray;
+        border-collapse: collapse;
+        text-align: center;
+      }
+
+      tr {
+        border: 1px solid darkgray;
+      }
+
+      th,
+      td {
+        border: 1px dashed darkgray;
       }
     </style>
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/solid.css"
+      integrity="sha384-r/k8YTFqmlOaqRkZuSiE9trsrDXkh07mRaoGBMoDcmA58OHILZPsk29i2BsFng1B"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/fontawesome.css"
+      integrity="sha384-4aon80D8rXCGx9ayDt85LbyUHeMWd3UiBaWliBlJ53yzm9hqN21A+o1pqoyK04h+"
+      crossorigin="anonymous"
+    />
   </head>
-  <body>
-    <h1><a href="data/FERdvorane.csv">CSV file</a></h1>
-    <h1><a href="data/FERdvorane.json">JSON file</a></h1>
 
-    <br />
-    <h1><a href="datatable.html">Data in table view</a></h1>
+  <body class="h-100">
+    <div id="app" class="h-100 d-flex flex-column">
+      <div class="nav-container">
+        <nav class="navbar navbar-expand-md navbar-light bg-light">
+          <div class="container">
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarNav"
+              aria-controls="navbarNav"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
 
-    <h2>Nazivi i opisi atributa (metapodaci)</h2>
-    <h3>Zgrada</h3>
-    <ul>
-      <li>oznZgrada - Jedinstvena oznaka zgrade.</li>
-    </ul>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                  <a href="/" class="nav-link route-link">Homepage</a>
+                </li>
+              </ul>
+              <ul class="navbar-nav d-none d-md-block">
+                <!-- Login button: show if NOT authenticated -->
+                <li class="nav-item auth-invisible">
+                  <button
+                    id="qsLoginBtn"
+                    onclick="login()"
+                    class="btn btn-primary btn-margin auth-invisible hidden"
+                  >
+                    Prijava
+                  </button>
+                </li>
+                <!-- / Login button -->
 
-    <h3>Dvorana</h3>
-    <ul>
-      <li>oznZgrada - Oznaka zgrade kojoj dvorana pripada.</li>
-      <li>oznDvorana - Jedinstvena oznaka dvorane (child).</li>
-      <li>kapacitet - Maksimalan kapacitet osoba u dvorani.</li>
-      <li>brojStolova - Broj stolova u dvorani.</li>
-      <li>brojStolica - Broj stolica u dvorani.</li>
-      <li>
-        imaKlimu - U dvorani postoji funkcionalan i dostupan klima uređaj.
-      </li>
-      <li>
-        imaPrirodnuSvjetlost - Dvorana ima prozore i pristup prirodnog
-        svjetlosti.
-      </li>
-      <li>
-        imaUticnice - Dvorana sadrži razvodne kutije i utičnice po zidovima
-        dvorane.
-      </li>
-      <li>
-        dvoranaSOpremom - Oprema može biti računala ili druga laboratorijska
-        oprema.
-      </li>
-      <li>
-        imaRacunalo - Dvorana sadrži fakultetsko računalo koje se može
-        koristiti.
-      </li>
-      <li>
-        imaHDMIKabel - Dvorana sadrži dostupan HDMI kabel pomoću kojeg se može
-        povezati vlastito računalo na projektor.
-      </li>
-      <li>imaMikrofon - Dvorana sadrži ugrađen mikrofon i razglas.</li>
-    </ul>
+                <!-- Fullsize dropdown: show if authenticated -->
+                <li class="nav-item dropdown auth-visible hidden">
+                  <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    id="profileDropDown"
+                    data-toggle="dropdown"
+                  >
+                    <!-- Profile image should be set to the profile picture from the id token -->
+                    <img
+                      alt="Profile picture"
+                      class="nav-user-profile profile-image rounded-circle"
+                      width="50"
+                    />
+                  </a>
+                  <div class="dropdown-menu">
+                    <!-- Show the user's full name from the id token here -->
+                    <div class="dropdown-header nav-user-name user-name"></div>
+
+                    <a
+                      href="#"
+                      class="dropdown-item"
+                      onclick="downloadDataFromDatabase()"
+                    >
+                      &darr; Osvježi preslike
+                    </a>
+                    <a
+                      href="/profile"
+                      class="dropdown-item dropdown-profile route-link"
+                    >
+                      <i class="fas fa-user mr-3"></i>Korisnički profil
+                    </a>
+                    <a
+                      href="#"
+                      class="dropdown-item"
+                      id="qsLogoutBtn"
+                      onclick="logout()"
+                    >
+                      <i class="fas fa-power-off mr-3"></i>Odjava
+                    </a>
+                  </div>
+                </li>
+                <!-- /Fullsize dropdown -->
+              </ul>
+
+              <!-- Responsive login button: show if NOT authenticated -->
+              <ul class="navbar-nav d-md-none auth-invisible">
+                <button
+                  class="btn btn-primary btn-block auth-invisible hidden"
+                  id="qsLoginBtn"
+                  onclick="login()"
+                >
+                  Prijava
+                </button>
+              </ul>
+              <!-- /Responsive login button -->
+
+              <!-- Responsive profile dropdown: show if authenticated -->
+              <ul
+                class="navbar-nav d-md-none auth-visible hidden justify-content-between"
+                style="min-height: 125px"
+              >
+                <li class="nav-item">
+                  <span class="user-info">
+                    <!-- Profile image should be set to the profile picture from the id token -->
+                    <img
+                      alt="Profile picture"
+                      class="nav-user-profile d-inline-block profile-image rounded-circle mr-3"
+                      width="50"
+                    />
+                    <!-- Show the user's full name from the id token here -->
+                    <h6 class="d-inline-block nav-user-name user-name"></h6>
+                  </span>
+                </li>
+
+                <li>
+                  <a
+                    href="#"
+                    class="dropdown-item"
+                    onclick="downloadDataFromDatabase()"
+                  >
+                    &darr; Osvježi preslike
+                  </a>
+                </li>
+
+                <li>
+                  <i class="fas fa-user mr-3"></i>
+                  <a href="/profile" class="route-link">Korisnički profil</a>
+                </li>
+
+                <li>
+                  <i class="fas fa-power-off mr-3"></i>
+                  <a href="#" id="qsLogoutBtn" onclick="logout()">Odjava</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+
+      <div id="main-content" class="container mt-5 flex-grow-1">
+        <div id="content-home" class="page">
+          <h1><a href="data/FERdvorane.csv">CSV file</a></h1>
+          <h1><a href="data/FERdvorane.json">JSON file</a></h1>
+
+          <h1><a href="./datatable">Data in table view</a></h1>
+
+          <h2>Nazivi i opisi atributa (metapodaci)</h2>
+          <h3>Zgrada</h3>
+          <ul>
+            <li>oznZgrada - Jedinstvena oznaka zgrade.</li>
+          </ul>
+
+          <h3>Dvorana</h3>
+          <ul>
+            <li>oznZgrada - Oznaka zgrade kojoj dvorana pripada.</li>
+            <li>oznDvorana - Jedinstvena oznaka dvorane (child).</li>
+            <li>kapacitet - Maksimalan kapacitet osoba u dvorani.</li>
+            <li>brojStolova - Broj stolova u dvorani.</li>
+            <li>brojStolica - Broj stolica u dvorani.</li>
+            <li>
+              imaKlimu - U dvorani postoji funkcionalan i dostupan klima uređaj.
+            </li>
+            <li>
+              imaPrirodnuSvjetlost - Dvorana ima prozore i pristup prirodnog
+              svjetlosti.
+            </li>
+            <li>
+              imaUticnice - Dvorana sadrži razvodne kutije i utičnice po
+              zidovima dvorane.
+            </li>
+            <li>
+              dvoranaSOpremom - Oprema može biti računala ili druga
+              laboratorijska oprema.
+            </li>
+            <li>
+              imaRacunalo - Dvorana sadrži fakultetsko računalo koje se može
+              koristiti.
+            </li>
+            <li>
+              imaHDMIKabel - Dvorana sadrži dostupan HDMI kabel pomoću kojeg se
+              može povezati vlastito računalo na projektor.
+            </li>
+            <li>imaMikrofon - Dvorana sadrži ugrađen mikrofon i razglas.</li>
+          </ul>
+        </div>
+
+        <div id="content-data" class="page">
+          <div>
+            <input
+              type="search"
+              class="searchInput"
+              onkeyup="filterTable()"
+              placeholder="Filter table data..."
+            />
+
+            <select class="columnSelect" onchange="filterTable()">
+              <option value="wildcard" selected>Sva polja (wildcard)</option>
+
+              <option value="oznzgrada">oznzgrada</option>
+              <option value="ozndvorana">ozndvorana</option>
+              <option value="kapacitet">kapacitet</option>
+              <option value="brojstolova">brojstolova</option>
+              <option value="brojstolica">brojstolica</option>
+              <option value="imaklimu">imaklimu</option>
+              <option value="imaprirodnusvjetlost">imaprirodnusvjetlost</option>
+              <option value="imauticnice">imauticnice</option>
+              <option value="dvoranasopremom">dvoranasopremom</option>
+              <option value="imaracunalo">imaracunalo</option>
+              <option value="imahdmikabel">imahdmikabel</option>
+              <option value="imamikrofon">imamikrofon</option>
+            </select>
+          </div>
+          <br />
+
+          <div>
+            <button onclick="downloadAsJSON()">
+              Download visible data in JSON format
+            </button>
+            <button onclick="downloadAsCSV()">
+              Download visible data in CSV format
+            </button>
+          </div>
+          <br />
+
+          <div style="overflow-x: auto">
+            <table class="table">
+              <thead>
+                <tr class="th-row">
+                  <th>
+                    <h4>oznzgrada</h4>
+                  </th>
+                  <th>
+                    <h4>ozndvorana</h4>
+                  </th>
+                  <th>
+                    <h4>kapacitet</h4>
+                  </th>
+                  <th>
+                    <h4>brojstolova</h4>
+                  </th>
+                  <th>
+                    <h4>brojstolica</h4>
+                  </th>
+                  <th>
+                    <h4>imaklimu</h4>
+                  </th>
+                  <th>
+                    <h4>imaprirodnusvjetlost</h4>
+                  </th>
+                  <th>
+                    <h4>imauticnice</h4>
+                  </th>
+                  <th>
+                    <h4>dvoranasopremom</h4>
+                  </th>
+                  <th>
+                    <h4>imaracunalo</h4>
+                  </th>
+                  <th>
+                    <h4>imahdmikabel</h4>
+                  </th>
+                  <th>
+                    <h4>imamikrofon</h4>
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <template data-template>
+                  <tr>
+                    <td class="oznzgrada"><p></p></td>
+                    <td class="ozndvorana"><p></p></td>
+                    <td class="kapacitet"><p></p></td>
+                    <td class="brojstolova"><p></p></td>
+                    <td class="brojstolica"><p></p></td>
+                    <td class="imaklimu"><p></p></td>
+                    <td class="imaprirodnusvjetlost"><p></p></td>
+                    <td class="imauticnice"><p></p></td>
+                    <td class="dvoranasopremom"><p></p></td>
+                    <td class="imaracunalo"><p></p></td>
+                    <td class="imahdmikabel"><p></p></td>
+                    <td class="imamikrofon"><p></p></td>
+                  </tr>
+                </template>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="page" id="content-profile">
+          <div class="container">
+            <div class="row align-items-center profile-header">
+              <div class="col-md-2">
+                <img
+                  alt="User's profile picture"
+                  class="rounded-circle img-fluid profile-image mb-3 mb-md-0"
+                />
+              </div>
+              <div class="col-md">
+                <h2 class="user-name"></h2>
+                <p class="lead text-muted user-email"></p>
+              </div>
+            </div>
+
+            <div class="row">
+              <pre class="rounded">
+                <code id="profile-data" class="json"></code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/app.js"></script>
+
+    <script>
+      const trTemplate = document.querySelector("[data-template]");
+      const tableHeadRows = document.querySelectorAll(".th-row > th > h4");
+      const tableBody = document.querySelector(".table > tbody");
+      const trows = tableBody.getElementsByTagName("tr");
+
+      const columnSelect = document.querySelector(".columnSelect");
+      const searchInputElement = document.querySelector(".searchInput");
+
+      // needs extension "CORS unblock" - https://stackoverflow.com/questions/36968963/how-to-configure-cors-in-a-spring-boot-spring-security-application
+      fetch("http://localhost:8080/dvorane")
+        .then((res) => res.json())
+        .then((data) => {
+          fillTable(data);
+        });
+
+      function fillTable(data) {
+        data.forEach((dvorana) => {
+          const trElement = trTemplate.content.cloneNode(true).children[0];
+
+          const oznzgradaElement = trElement.querySelector(".oznzgrada");
+          const ozndvoranaElement = trElement.querySelector(".ozndvorana");
+          const kapacitetElement = trElement.querySelector(".kapacitet");
+          const brojstolovaElement = trElement.querySelector(".brojstolova");
+          const brojstolicaElement = trElement.querySelector(".brojstolica");
+          const imaklimuElement = trElement.querySelector(".imaklimu");
+          const imaprirodnusvjetlostElement = trElement.querySelector(
+            ".imaprirodnusvjetlost"
+          );
+          const imauticniceElement = trElement.querySelector(".imauticnice");
+          const dvoranasopremomElement =
+            trElement.querySelector(".dvoranasopremom");
+          const imaracunaloElement = trElement.querySelector(".imaracunalo");
+          const imahdmikabelElement = trElement.querySelector(".imahdmikabel");
+          const imamikrofonElement = trElement.querySelector(".imamikrofon");
+
+          oznzgradaElement.firstChild.innerText = dvorana.oznzgrada;
+          ozndvoranaElement.firstChild.innerText = dvorana.ozndvorana;
+          kapacitetElement.firstChild.innerText = dvorana.kapacitet;
+          brojstolovaElement.firstChild.innerText = dvorana.brojstolova;
+          brojstolicaElement.firstChild.innerText = dvorana.brojstolica;
+          imaklimuElement.firstChild.innerText = dvorana.imaklimu;
+          imaprirodnusvjetlostElement.firstChild.innerText =
+            dvorana.imaprirodnusvjetlost;
+          imauticniceElement.firstChild.innerText = dvorana.imauticnice;
+          dvoranasopremomElement.firstChild.innerText = dvorana.dvoranasopremom;
+          imaracunaloElement.firstChild.innerText = dvorana.imaracunalo;
+          imahdmikabelElement.firstChild.innerText = dvorana.imahdmikabel;
+          imamikrofonElement.firstChild.innerText = dvorana.imamikrofon;
+
+          tableBody.append(trElement);
+        });
+      }
+
+      function filterTable() {
+        const filter = searchInputElement.value.toUpperCase();
+
+        let tdatas, txtValue;
+        for (let i = 0; i < trows.length; i++) {
+          tdatas = trows[i].getElementsByTagName("td");
+
+          let displayRow = "none";
+          for (let j = 0; j < tdatas.length; j++) {
+            if (
+              columnSelect.value !== "wildcard" &&
+              tableHeadRows[j].textContent !== columnSelect.value
+            ) {
+              continue;
+            }
+
+            if (tdatas[j]) {
+              txtValue = tdatas[j].textContent || tdatas[j].innerText;
+              if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                displayRow = "";
+                break; // go check next row
+              }
+            }
+          }
+
+          trows[i].style.display = displayRow;
+        }
+      }
+
+      function convertTableToCSV() {
+        let csv = "";
+        let columnNames = "";
+        let columnValues = "";
+
+        for (let i = 0; i < trows.length; i++) {
+          columnValues = "";
+
+          tdatas = trows[i].getElementsByTagName("td");
+          // console.log(trows[i].childNodes);
+
+          if (trows[i].style.display === "") {
+            for (let j = 1; j < trows[i].childNodes.length; j += 2) {
+              columnNames += columnNames.length > 0 ? "," : "";
+              columnNames += trows[i].childNodes[j].className;
+            }
+
+            // console.log(columnNames);
+            if (csv.length === 0) csv += columnNames;
+          }
+
+          if (trows[i].style.display === "") {
+            for (let j = 1; j < trows[i].childNodes.length; j += 2) {
+              columnValues += columnValues.length > 0 ? "," : "";
+              columnValues += trows[i].childNodes[j].textContent;
+            }
+
+            // console.log(columnValues);
+            csv += "\n" + columnValues;
+          }
+        }
+
+        return csv;
+      }
+
+      function downloadAsCSV() {
+        const csv = convertTableToCSV();
+
+        saveObjectToFile(csv, "tabledata.csv");
+      }
+
+      function downloadAsJSON() {
+        const csv = convertTableToCSV();
+        const json = csvToJSON(csv);
+        saveObjectToFile(json, "tabledata.json");
+      }
+
+      function downloadDataFromDatabase() {
+        searchInputElement.value = "";
+        filterTable();
+
+        const csv = convertTableToCSV();
+        saveObjectToFile(csv, "tabledata.csv");
+        const json = csvToJSON(csv);
+        saveObjectToFile(json, "tabledata.json");
+      }
+
+      // custom function for saving object into file
+      function saveObjectToFile(data, filename) {
+        if (!data) {
+          console.error("Console.save: No data");
+          return;
+        }
+
+        if (!filename) filename = "console.json";
+
+        if (typeof data === "object") {
+          data = JSON.stringify(data, undefined, 4);
+        }
+
+        var blob = new Blob([data], { type: "text/json" }),
+          e = document.createEvent("MouseEvents"),
+          a = document.createElement("a");
+
+        a.download = filename;
+        a.href = window.URL.createObjectURL(blob);
+        a.dataset.downloadurl = ["text/json", a.download, a.href].join(":");
+        e.initMouseEvent(
+          "click",
+          true,
+          false,
+          window,
+          0,
+          0,
+          0,
+          0,
+          0,
+          false,
+          false,
+          false,
+          false,
+          0,
+          null
+        );
+        a.dispatchEvent(e);
+      }
+
+      // custom function for converting csv object into json
+      function csvToJSON(csv) {
+        var lines = csv.split("\n");
+
+        var result = [];
+
+        // NOTE: If your columns contain commas in their values, you'll need
+        // to deal with those before doing the next step
+        // (you might convert them to &&& or something, then covert them back later)
+        // jsfiddle showing the issue https://jsfiddle.net/
+        var headers = lines[0].split(",");
+
+        for (var i = 1; i < lines.length; i++) {
+          var obj = {};
+          var currentline = lines[i].split(",");
+
+          for (var j = 0; j < headers.length; j++) {
+            obj[headers[j]] = currentline[j];
+          }
+
+          result.push(obj);
+        }
+
+        //return result; //JavaScript object
+        return JSON.stringify(result); //JSON
+      }
+    </script>
   </body>
 </html>
